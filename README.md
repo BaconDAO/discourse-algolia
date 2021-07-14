@@ -143,3 +143,11 @@ Once you've indexed your data with Algolia, you can see it and search it from th
 ## Support
 
 Have a question? Ran into an issue? If it's code-related, please file an issue in this repository and include as much information as possible. If it's a general question, please post it on the [Algolia Community Forum](https://discourse.algolia.com/) and add the tag `#discourse-algolia`. We look forward to hearing from you!
+
+## Production Environment Gotchas
+
+**Using Digital Ocean**
+When running `algolia:initialize` script:
+- If Docker, need to enter docker container first with `./launcher enter app`
+- If encountering error `Peer authentication failed for user "discourse"`, need to run script from `discourse` user. First switch to discourse user with `su - discourse`, then `cd` back to the discourse install folder with `cd /var/discourse/`
+- If encountering error `LoadError: cannot load such file -- rspec/core/rake_task`, this means some Gems are not installed for the current environment. Run the initialize script by adding env in front: `RAILS_ENV=production LOAD_PLUGINS=1 bundle exec rails algolia:initialize`
